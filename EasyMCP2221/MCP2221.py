@@ -143,19 +143,28 @@ class Device:
                 if usbserial is not None:
                     found = False
                     for idx, dev in enumerate(hid.enumerate(self.VID, self.PID)):
-                        try:
+                        # try:
+                        #     self.hidhandler.open_path(dev["path"])
+
+                        #     if usbserial == self.read_flash_info()['USB_SERIAL']:
+                        #         found = True
+                        #         self.usbserial = usbserial # for caching
+                        #         self.devnum = idx
+                        #         break
+                        #     else:
+                        #         self.hidhandler.close()
+
+                        # except:
+                        #     pass
+
+                        # Relies on devices enumerating with usbserial
+                        # Can configure this setting with MCP2221 Utility
+                        if dev["serial_number"] == usbserial:
                             self.hidhandler.open_path(dev["path"])
-
-                            if usbserial == self.read_flash_info()['USB_SERIAL']:
-                                found = True
-                                self.usbserial = usbserial # for caching
-                                self.devnum = idx
-                                break
-                            else:
-                                self.hidhandler.close()
-
-                        except:
-                            pass
+                            found = True
+                            self.usbserial = usbserial # for caching
+                            self.devnum = idx
+                            break
 
                     if not found:
                         raise RuntimeError("No device found with serial number %s or already in use." % usbserial)
