@@ -75,6 +75,10 @@ Reinoso Guzman (https://www.electronicayciencia.com).
 
 Initially based on PyMCP2221A library by Yuta Kitagami (https://github.com/nonNoise/PyMCP2221A).
 
+This fork was created to address a niche use-case of simultaneously communicating with two MCP2221 deivces from separate sessions, specifying by USB serial number. 
+Initialisation behaviour has been changed to only search through enumerated SNs rather than connecting to devices to read flash info, which was causing conflicts. 
+This means that there is a reliance on the MCP2221 devices enumerating with their serial number visible, which is disabled by default but can be enabled in the MCP2221 Utility.
+
 
 License
 ----------------------------------------------------
