@@ -167,7 +167,7 @@ class Device:
                             break
 
                     if not found:
-                        raise RuntimeError("No device found with serial number %s or already in use." % usbserial)
+                        raise RuntimeError("No device found with serial number %s or already in use. Ensure device is configured to enumerate with serial number." % usbserial)
                     else:
                         break
 
